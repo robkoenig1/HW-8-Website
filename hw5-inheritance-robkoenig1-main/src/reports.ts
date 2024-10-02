@@ -17,22 +17,33 @@ If you want to see what these look like in action, try running the `reportExampl
     $> npm run reports
 */
 
-export class WeatherReport {
-    private title: string;
-    constructor(
-        private region: string,
-        private temperature: number,
-        private humidity: number,
-    ) {
-        this.title = `Weather in ${region}`;
+export class Report {
+    protected title: string
+    constructor(_title: string) {
+        this.title = _title
     }
-
+    protected getBody(): string[]{
+        return this.getBody()
+    }
     public toHtml(): string {
         const body = "<p>" + this.getBody().join("</p>\n<p>") + "</p>";
         return `<html><head><title>${this.title}</title></head>\n<body>\n<h1>${this.title}</h1>\n${body}</body></html>`;
     }
     public toMarkdown(): string {
         return `# ${this.title}\n${this.getBody().join("\n")}`;
+    }
+
+}
+
+export class WeatherReport extends Report{
+    //private title: string;
+    constructor(
+        private region: string,
+        private temperature: number,
+        private humidity: number,
+        //name: string
+    ) {
+        super(`Weather in ${region}`);
     }
 
     protected getBody(): string[] {
@@ -43,22 +54,15 @@ export class WeatherReport {
     }
 }
 
-export class GradeReport {
-    private title: string;
+export class GradeReport extends Report{
+    //private title: string;
     constructor(
         private student: string,
         private course: string,
         private score: number,
+        //name: string
     ) {
-        this.title = `Grade for ${student} in ${course}`;
-    }
-
-    public toHtml(): string {
-        const body = "<p>" + this.getBody().join("</p>\n<p>") + "</p>";
-        return `<html><head><title>${this.title}</title></head>\n<body>\n<h1>${this.title}</h1>\n${body}</body></html>`;
-    }
-    public toMarkdown(): string {
-        return `# ${this.title}\n${this.getBody().join("\n")}`;
+        super(`Grade for ${student} in ${course}`);
     }
 
     private getGrade(): string {
