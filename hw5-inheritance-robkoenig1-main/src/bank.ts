@@ -62,6 +62,61 @@ export class BankAccount {
     }
 }
 
+export class SafeAccount extends BankAccount {
+    private password: string = "";
+    public log: string[] = [];
+
+    changePassword(newPassword: string): void{
+        this.password = newPassword;
+    }
+    checkPassword(newPassword: string): boolean{
+        super.checkPassword(newPassword)
+        return ((this.password === newPassword) && (this.password != ""))
+    }
+    deposit(amount: number): number {
+        if (amount >= 0){
+            this.log.push("Deposited " + amount)
+            return super.deposit(amount)
+        }
+        this.log.push("Cannot deposit negative amount " + amount)
+        return super.deposit(0)
+    }
+    withdraw(amount: number): number{
+        if (amount < 0){
+            this.log.push("Cannot withdraw negative amount " + amount)
+            return super.withdraw(0)
+        } else if (this.balance - amount < 0){
+            this.log.push("Cannot withdraw " + amount + " when balance is " + this.balance)
+            return super.withdraw(0)
+        } else {
+            this.log.push("Withdrew " + amount)
+            return super.withdraw(amount)
+        }
+    }
+}
+
+export function safeAccountExample(): void{
+    const mySafeAccount = new SafeAccount(100);
+    mySafeAccount.changePassword("password123")
+    console.log(mySafeAccount.checkPassword("12345"))
+    console.log(mySafeAccount.checkPassword("password123"))
+    console.log(
+        "Depositing 50 dollars. New balance:",
+        mySafeAccount.deposit(50),
+    );
+    console.log("Withdrawing", mySafeAccount.withdraw(10), "dollars");
+    console.log(
+        "Withdrawing",
+        mySafeAccount.withdraw(1000),
+        "dollars.",
+    );
+    console.log(
+        "Depositing -2000 dollars. New balance:",
+        mySafeAccount.deposit(-2000),
+    );
+    console.log(mySafeAccount.log)
+}
+
 /**
  * A little function we use to show off our code.
  * You can run this function using `npm run bank`.
