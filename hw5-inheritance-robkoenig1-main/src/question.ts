@@ -32,7 +32,7 @@ These classes will represent questions on a quiz, to create a quiz-taking applic
             **NOTE:** If you're having trouble getting the output to match the expected output, you should check the tests to see what the expected output is.
 */
 
-export class QuizQuestions {
+export class QuizQuestion {
     protected title: string;
     protected body: string;
     protected expectedAnswer: string;
@@ -48,13 +48,13 @@ export class QuizQuestions {
     }
 }
 
-export class ShortAnswerQuestion extends QuizQuestions{
+export class ShortAnswerQuestion extends QuizQuestion{
     ask(): string{
         return this.body + "\n> "
     }
 }
 
-export class TrueFalseQuestion extends QuizQuestions{
+export class TrueFalseQuestion extends QuizQuestion{
     ask(): string{
         return this.body + "\n> True or False?"
     }
@@ -63,7 +63,7 @@ export class TrueFalseQuestion extends QuizQuestions{
     }
 }
 
-export class MultipleChoiceQuestion extends QuizQuestions{
+export class MultipleChoiceQuestion extends QuizQuestion{
     protected options: string[]
     constructor(_title: string, _body: string, _expectedAnswer: string, _options: string[]){
         super(_title, _body, _expectedAnswer)
