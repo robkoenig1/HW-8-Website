@@ -31,3 +31,46 @@ These classes will represent questions on a quiz, to create a quiz-taking applic
             **NOTE:** The `ask` method should not actually print anything. It should just return the string that would be printed.
             **NOTE:** If you're having trouble getting the output to match the expected output, you should check the tests to see what the expected output is.
 */
+
+export class QuizQuestions {
+    protected title: string;
+    protected body: string;
+    protected expectedAnswer: string;
+
+    constructor(_title: string, _body: string, _expectedAnswer: string){
+        this.title = _title;
+        this.body = _body;
+        this.expectedAnswer = _expectedAnswer
+    }
+
+    check(answer: string): boolean{
+        return (answer === this.expectedAnswer)
+    }
+}
+
+export class ShortAnswerQuestion extends QuizQuestions{
+    ask(): string{
+        return this.body + "\n> "
+    }
+}
+
+export class TrueFalseQuestion extends QuizQuestions{
+    ask(): string{
+        return this.body + "\n> True or False?"
+    }
+    check(answer: string): boolean{
+        return (answer.toLowerCase() === this.expectedAnswer.toLowerCase())
+    }
+}
+
+export class MultipleChoiceQuestion extends QuizQuestions{
+    protected options: string[]
+    constructor(_title: string, _body: string, _expectedAnswer: string, _options: string[]){
+        super(_title, _body, _expectedAnswer)
+        this.options = _options
+    }
+    ask(): string{
+        return this.body + "\n" + this.options.join(". \n") + "> "
+    }
+
+}
