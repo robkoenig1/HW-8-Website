@@ -70,7 +70,11 @@ export class MultipleChoiceQuestion extends QuizQuestion{
         this.options = _options
     }
     ask(): string{
-        return this.body + "\n" + this.options.join(". \n") + "> "
+        let output: string[] = []
+        for (let i: number = 0; i < this.options.length; i++){
+            output.push((i + 1) + ". " + this.options[i] + "\n")
+        }
+        return this.body + "\n" + output + "> "
     }
 
 }
