@@ -18,10 +18,7 @@ If you want to see what these look like in action, try running the `reportExampl
 */
 
 export class Report {
-    protected title: string
-    constructor(_title: string) {
-        this.title = _title
-    }
+    protected title: string = ''
     protected getBody(): string[]{
         return this.getBody()
     }
@@ -43,7 +40,8 @@ export class WeatherReport extends Report{
         private humidity: number,
         //name: string
     ) {
-        super(`Weather in ${region}`);
+        super();
+        this.title = `Weather in ${region}`
     }
 
     protected getBody(): string[] {
@@ -62,7 +60,8 @@ export class GradeReport extends Report{
         private score: number,
         //name: string
     ) {
-        super(`Grade for ${student} in ${course}`);
+        super();
+        this.title = `Grade for ${student} in ${course}`;
     }
 
     private getGrade(): string {
