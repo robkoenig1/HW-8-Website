@@ -20,7 +20,7 @@ If you want to see what these look like in action, try running the `reportExampl
 export class Report {
     protected title: string = ''
     protected getBody(): string[]{
-        return this.getBody()
+        return []
     }
     public toHtml(): string {
         const body = "<p>" + this.getBody().join("</p>\n<p>") + "</p>";
