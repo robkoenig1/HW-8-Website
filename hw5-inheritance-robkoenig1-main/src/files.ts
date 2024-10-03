@@ -49,6 +49,52 @@ import { colorize } from "./utilities/colorize";
 Your BasicFile, EditableFile, and ColorfulFile classes should go here!
 */
 
+export class BasicFile {
+    protected name: string
+    protected contents: string
+
+    constructor(_name: string, _contents: string){
+        this.name = _name
+        this.contents = _contents
+    }
+
+    getName(): string{
+        return this.name
+    }
+    getSize(): number{
+        return this.contents.length
+    }
+    getContents(): string{
+        return this.contents
+    }
+    copy(): BasicFile{
+        return new BasicFile(this.name, this.contents)
+    }
+}
+
+export class EditableFile extends BasicFile {
+    write(input: string): void{
+        this.contents = input
+    }
+    append(input: string): void{
+        this.contents = this.contents + input
+    }
+    copy(): EditableFile{
+        return new EditableFile(this.name, this.contents)
+    }
+}
+
+export class ColorfulFile extends EditableFile {
+    copy(): ColorfulFile{
+        return new ColorfulFile(this.name, this.contents)
+    }
+    render(): string{
+        return colorize(this.contents)
+    }
+}
+
+
+
 /**
  * Try running the `fileExample` function to see the classes in action using this command:
  *    $> npm run files
