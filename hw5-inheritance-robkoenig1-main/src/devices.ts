@@ -77,7 +77,7 @@ export class Phone{
         this.system.addFile("contacts.txt", "Ada\nBabbage\nCaptain")
         this.system.addFile("history.log", "")
     }
-    addContacts(contact: string): void{
+    addContact(contact: string): void{
         let file: ColorfulFile = this.system.openFile("contacts.txt")
         file.append("\n" + contact)
     }
