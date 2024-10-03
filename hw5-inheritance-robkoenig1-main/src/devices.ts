@@ -35,3 +35,66 @@ We aren't going to explicitly tell you what relationships to define between the 
     Which ones extend, and which ones compose?
 */
 import { ColorfulFile } from "./files";
+
+export class OperatingSystem {
+    protected files: ColorfulFile[] = []
+    protected emptyFile: ColorfulFile = new ColorfulFile("EMPTY", "")
+
+    addFile(inputName: string, inputContents: string): void{
+        let newFile = new ColorfulFile(inputName, inputContents)
+        this.files.push(newFile)
+    }
+    openFile(inputName: string): ColorfulFile{
+        for (let i: number = 0; i < this.files.length; i++){
+            let fileName: string = this.files[i].getName()
+            if (fileName === inputName){
+                return this.files[i]
+            }
+        }
+        return this.emptyFile
+    }
+}
+
+export class Device{
+    public name: string
+    public weight: number
+
+    constructor(_name:string, _weight: number){
+        this.name = _name
+        this.weight = _weight
+    }
+}
+
+export class Phone{
+    public name: string
+    public weight: number
+    public system: OperatingSystem
+
+    constructor(_name:string, _weight: number){
+        this.name = _name
+        this.weight = _weight
+        this.system = new OperatingSystem()
+        this.system.addFile("contacts.txt", "Ada\nBabbage\nCaptain")
+        this.system.addFile("history.log", "")
+    }
+    addContacts(contact: string): void{
+        let file: ColorfulFile = this.system.openFile("contacts.txt")
+        file.append("\n" + contact)
+    }
+    getHistory(): string{
+        let file: ColorfulFile = this.system.openFile("history.log")
+        return file.getContents()
+    }
+    sendText(contact: string, message: string): boolean{
+        let contactExist: boolean = false
+        let file1: ColorfulFile = this.system.openFile("contacts.txt")
+        let file2: ColorfulFile = this.system.openFile("history.log")
+        let contacts: string = file1.getContents()
+        let history: string = file2.getContents()
+        if (contacts.includes(contact) && (history != "")){
+            contactExist = true
+            file2.append("Sent text to " + contact + ": " + message)
+        }
+        return contactExist
+    }
+}
