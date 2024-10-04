@@ -65,14 +65,11 @@ export class Device{
     }
 }
 
-export class Phone{
-    public name: string
-    public weight: number
+export class Phone extends Device{
     public system: OperatingSystem
 
     constructor(_name:string, _weight: number){
-        this.name = _name
-        this.weight = _weight
+        super(_name, _weight)
         this.system = new OperatingSystem()
         this.system.addFile("contacts.txt", "Ada\nBabbage\nCaptain")
         this.system.addFile("history.log", "")
