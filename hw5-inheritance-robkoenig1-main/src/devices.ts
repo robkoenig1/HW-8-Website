@@ -90,7 +90,7 @@ export class Phone extends Device{
         let history: string = this.getHistory()
         if (contacts.includes(contact)){
             contactExist = true
-            file2.append("Sent text to " + contact + ": " + message)
+            file2.append("Sent text to " + contact + ": " + message + "\n")
         }
         return contactExist
     }
