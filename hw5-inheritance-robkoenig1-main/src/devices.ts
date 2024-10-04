@@ -87,8 +87,8 @@ export class Phone extends Device{
         let file1: ColorfulFile = this.system.openFile("contacts.txt")
         let file2: ColorfulFile = this.system.openFile("history.log")
         let contacts: string = file1.getContents()
-        let history: string = file2.getContents()
-        if (contacts.includes(contact) && (history.length > 0)){
+        let history: string = this.getHistory()
+        if (contacts.includes(contact)){
             contactExist = true
             file2.append("Sent text to " + contact + ": " + message)
         }
