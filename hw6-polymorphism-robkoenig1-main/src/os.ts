@@ -35,7 +35,7 @@ export class OperatingSystem {
         return new BasicFile(name, "");
     }
 
-    addFile(newFile: BasicFile): void {
+    createFile(newFile: BasicFile): void {
         this.files.push(newFile);
     }
     /*
