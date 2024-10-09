@@ -22,10 +22,12 @@ subclasses must implement (which they already did, in fact).
 
 import {
     MultipleChoiceQuestion,
+    QuizQuestion,
     ShortAnswerQuestion,
     TrueFalseQuestion,
 } from "./utilities/question";
 
+/*
 export function makeQuiz(
     trueFalse: TrueFalseQuestion[],
     shortAnswer: ShortAnswerQuestion[],
@@ -42,4 +44,13 @@ export function makeQuiz(
         quiz.push(q.ask());
     }
     return quiz.join("\n");
+}
+*/
+
+export function makeQuiz(newQuiz: QuizQuestion[]): string{
+    let quiz: string[] = []
+    for (let question of newQuiz){
+        quiz.push(question.ask())
+    }
+    return quiz.join("\n")
 }
