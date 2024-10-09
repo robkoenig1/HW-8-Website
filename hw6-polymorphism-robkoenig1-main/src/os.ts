@@ -82,8 +82,8 @@ export class OperatingSystem {
 
 export function makeTestOS(): OperatingSystem{
     let newOS: OperatingSystem = new OperatingSystem()
-    newOS.addFile(new BasicFile("first.txt", "Hello, world!"))
-    newOS.addFile(new BasicFile("second.txt", "Hola, mundo!"))
-    newOS.addFile(new BasicFile("third.txt", "[blue]Wow![reset]"))
+    newOS.createFile(new BasicFile("first.txt", "Hello, world!"))
+    newOS.createFile(new BasicFile("second.txt", "Hola, mundo!"))
+    newOS.createFile(new BasicFile("third.txt", "[blue]Wow![reset]"))
     return newOS
 }
