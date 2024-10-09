@@ -24,6 +24,21 @@ makes the code difficult to maintain and extend.
 import { BasicFile, ColorfulFile, EditableFile } from "./utilities/files";
 
 export class OperatingSystem {
+    private files: BasicFile[] = [];
+
+    openFile(name: string): BasicFile {
+        for (let file of this.files) {
+            if (file.getName() === name) {
+                return file;
+            }
+        }
+        return new BasicFile(name, "");
+    }
+
+    addFile(newFile: BasicFile): void {
+        this.files.push(newFile);
+    }
+    /*
     private readOnlyFiles: BasicFile[] = [];
     private editableFiles: EditableFile[] = [];
     private colorfulFiles: ColorfulFile[] = [];
@@ -62,4 +77,13 @@ export class OperatingSystem {
         }
         return new ColorfulFile(name, "");
     }
+    */
+}
+
+export function makeTestOS(): OperatingSystem{
+    let newOS: OperatingSystem = new OperatingSystem()
+    newOS.addFile(new BasicFile("first.txt", "Hello, world!"))
+    newOS.addFile(new BasicFile("second.txt", "Hola, mundo!"))
+    newOS.addFile(new BasicFile("third.txt", "[blue]Wow![reset]"))
+    return newOS
 }
