@@ -54,3 +54,15 @@ export function makeQuiz(newQuiz: QuizQuestion[]): string{
     }
     return quiz.join("\n")
 }
+
+export function gradeQuiz(newQuiz: QuizQuestion[], studentAnswers: string[]): number {
+    let correctAnswers: number = 0;
+    for (let i = 0; i < newQuiz.length; i++) {
+        const question = newQuiz[i];
+        const studentAnswer = studentAnswers[i];
+        if (question.check(studentAnswer)) {
+            correctAnswers++;
+        }
+    }
+    return correctAnswers;
+}
