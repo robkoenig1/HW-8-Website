@@ -37,3 +37,69 @@ copy when grading your code. However, you can define new classes that extend the
 */
 
 import { Time } from "./utilities/abstract_time";
+
+export class Second extends Time {
+    constructor(input: number){
+        super(input)
+    }
+    getSeconds(): number{
+        return this.amount
+    }
+    getUnits(): string{
+        return "second"
+    }
+}
+
+export class Minute extends Time {
+    constructor(input: number){
+        super(input)
+    }
+    getSeconds(): number{
+        return this.amount * 60
+    }
+    getUnits(): string{
+        return "minute"
+    }
+}
+
+export class Hour extends Time {
+    constructor(input: number){
+        super(input)
+    }
+    getSeconds(): number{
+        return this.amount * 3600
+    }
+    getUnits(): string{
+        return "hour"
+    }
+}
+
+export function totalTime(input: Time[]): number{
+    let total: number = 0
+    for (let time of input){
+        total += time.getSeconds()
+    }
+    return total
+}
+
+export function describeTimes(input: Time[]): string{
+    let total: string[] = []
+    for (let time of input){
+        total.push(time.toString())
+    }
+    return total.join(", ")
+}
+
+export function parseTime(input:string): Time{
+    let splitInput: string[] = input.split(" ");
+    let inputTime: number = parseInt(splitInput[0])
+    let inputUnit: string = splitInput[1]
+    if (inputUnit === "second" || inputUnit === "seconds"){
+        return new Second(inputTime)
+    } else if (inputUnit === "minute" || inputUnit === "minutes"){
+        return new Minute(inputTime)
+    } else if (inputUnit === "hour" || inputUnit === "hours"){
+        return new Hour(inputTime)
+    }
+    return new Second(0)
+}
