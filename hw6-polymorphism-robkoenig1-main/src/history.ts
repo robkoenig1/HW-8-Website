@@ -38,3 +38,31 @@ There are a few other differences too:
         you call!
  */
 import { Action, History } from "./utilities/abstract_history";
+
+export class LimitedHistory extends History {
+    private limit: number;
+    private removals: number;
+
+    constructor(_limit: number) {
+        super();
+        this.limit = _limit;
+        this.removals = 0;
+    }
+
+    count(): number {
+        return this.limit;
+    }
+
+    remove(): void {
+        this.removals++;
+        super.remove();
+    }
+
+    add(input: Action): string {
+        super.add(input);
+        if (super.count() >= this.count()) {
+            this.remove();
+        }
+        return this.toString();
+    }
+}
