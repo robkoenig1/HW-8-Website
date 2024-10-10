@@ -15,3 +15,19 @@ The class has been imported into this file, so it is available to be used.
 */
 
 import { Task } from "./utilities/abstract_task";
+
+export class TimedTask extends Task {
+    public duration: number;
+
+    constructor(_title: string, _duration: number) {
+        super(_title);
+        this.duration = _duration;
+    }
+
+    isDone(): boolean {
+        if (this.isDone() && this.duration <= 0) {
+            return true;
+        }
+        return false;
+    }
+}
