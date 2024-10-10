@@ -29,6 +29,68 @@ in programming languages.
     value of the result of evaluating the `inner` field using the `Math.abs` builtin function.
 */
 
+export abstract class Expression {
+    evaluate(): number {
+        return 0;
+    }
+}
+
+export class Constant extends Expression {
+    private value: number;
+
+    constructor(_value: number) {
+        super();
+        this.value = _value;
+    }
+
+    evaluate(): number {
+        return this.value;
+    }
+}
+
+export class Add extends Expression {
+    private left: number;
+    private right: number;
+
+    constructor(_left: number, _right: number) {
+        super();
+        this.left = _left;
+        this.right = _right;
+    }
+
+    evaluate(): number {
+        return this.left + this.right;
+    }
+}
+
+export class Sub extends Expression {
+    private left: number;
+    private right: number;
+
+    constructor(_left: number, _right: number) {
+        super();
+        this.left = _left;
+        this.right = _right;
+    }
+
+    evaluate(): number {
+        return this.left - this.right;
+    }
+}
+
+export class Abs extends Expression {
+    private inner: number;
+
+    constructor(_inner: number) {
+        super();
+        this.inner = _inner;
+    }
+
+    evaluate(): number {
+        return Math.abs(this.inner);
+    }
+}
+
 export function evaluate(expression: Expression): number {
     return expression.evaluate();
 }
