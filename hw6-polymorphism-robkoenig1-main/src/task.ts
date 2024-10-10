@@ -25,7 +25,7 @@ export class TimedTask extends Task {
     }
 
     isDone(): boolean {
-        if (this.isDone() && this.duration <= 0) {
+        if (super.isDone() && this.duration <= 0) {
             return true;
         }
         return false;
