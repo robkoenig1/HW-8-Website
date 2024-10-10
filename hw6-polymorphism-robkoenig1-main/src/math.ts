@@ -52,7 +52,7 @@ export class Add extends Expression {
     private left: number;
     private right: number;
 
-    constructor(_left: Constant, _right: Constant) {
+    constructor(_left: Expression, _right: Expression) {
         super();
         this.left = _left.evaluate();
         this.right = _right.evaluate();
@@ -67,7 +67,7 @@ export class Sub extends Expression {
     private left: number;
     private right: number;
 
-    constructor(_left: Constant, _right: Constant) {
+    constructor(_left: Expression, _right: Expression) {
         super();
         this.left = _left.evaluate();
         this.right = _right.evaluate();
@@ -81,7 +81,7 @@ export class Sub extends Expression {
 export class Abs extends Expression {
     private inner: number;
 
-    constructor(_inner: Constant) {
+    constructor(_inner: Expression) {
         super();
         this.inner = _inner.evaluate();
     }
