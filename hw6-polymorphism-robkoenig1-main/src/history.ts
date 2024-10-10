@@ -60,7 +60,7 @@ export class LimitedHistory extends History {
 
     add(input: Action): string {
         super.add(input);
-        if (super.count() >= this.count()) {
+        if (super.count() >= this.limit) {
             this.remove();
         }
         return this.toString();
