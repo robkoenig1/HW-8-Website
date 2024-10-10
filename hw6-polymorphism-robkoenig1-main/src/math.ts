@@ -49,45 +49,45 @@ export class Constant extends Expression {
 }
 
 export class Add extends Expression {
-    private left: number;
-    private right: number;
+    private left: Constant;
+    private right: Constant;
 
-    constructor(_left: number, _right: number) {
+    constructor(_left: Constant, _right: Constant) {
         super();
         this.left = _left;
         this.right = _right;
     }
 
     evaluate(): number {
-        return this.left + this.right;
+        return this.left.evaluate() + this.right.evaluate();
     }
 }
 
 export class Sub extends Expression {
-    private left: number;
-    private right: number;
+    private left: Constant;
+    private right: Constant;
 
-    constructor(_left: number, _right: number) {
+    constructor(_left: Constant, _right: Constant) {
         super();
         this.left = _left;
         this.right = _right;
     }
 
     evaluate(): number {
-        return this.left - this.right;
+        return this.left.evaluate() - this.right.evaluate();
     }
 }
 
 export class Abs extends Expression {
-    private inner: number;
+    private inner: Constant;
 
-    constructor(_inner: number) {
+    constructor(_inner: Constant) {
         super();
         this.inner = _inner;
     }
 
     evaluate(): number {
-        return Math.abs(this.inner);
+        return Math.abs(this.inner.evaluate());
     }
 }
 
