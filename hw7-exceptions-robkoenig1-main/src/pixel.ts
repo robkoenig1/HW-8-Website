@@ -47,7 +47,7 @@ export class Pixel {
      */
     getRGB(): string {
         if (
-            this.green < 0 ||
+            this.red < 0 ||
             this.red > 255 ||
             this.green < 0 ||
             this.green > 255 ||
