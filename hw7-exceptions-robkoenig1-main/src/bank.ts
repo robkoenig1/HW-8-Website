@@ -17,3 +17,28 @@ Use the `super` keyword to call the parent class methods and reuse their functio
 You will not need to provide a constructor for the ExceptionalAccount class.
 */
 import { BankAccount } from "./utilities/bank";
+
+export class ExceptionalAccount extends BankAccount {
+    deposit(amount: number): number {
+        if (amount < 0) {
+            throw new Error("Cannot deposit negative amount " + amount);
+        }
+        return super.deposit(amount);
+    }
+
+    withdraw(amount: number): number {
+        if (amount < 0) {
+            throw new Error("Cannot withdraw negative amount " + amount);
+        }
+        if (amount > super.getBalance()) {
+            throw new Error(
+                "Cannot withdraw " +
+                    amount +
+                    ", only " +
+                    super.getBalance() +
+                    " available",
+            );
+        }
+        return super.withdraw(amount);
+    }
+}
