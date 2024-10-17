@@ -46,21 +46,35 @@ export class Pixel {
      * @throws Error if the red, green, or blue values are outside of the valid range.
      */
     getRGB(): string {
-        if (this.green < 0 || this.red > 255 || this.green < 0 || this.green > 255 || this.blue < 0 || this.blue > 255){
-            throw new Error("Invalid RGB values: " + this.red + ", " +  this.green + ", " + this.blue)
+        if (
+            this.green < 0 ||
+            this.red > 255 ||
+            this.green < 0 ||
+            this.green > 255 ||
+            this.blue < 0 ||
+            this.blue > 255
+        ) {
+            throw new Error(
+                "Invalid RGB values: " +
+                    this.red +
+                    ", " +
+                    this.green +
+                    ", " +
+                    this.blue,
+            );
         }
         return "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")";
     }
 }
 
-function makeColor(input: string): Pixel{
-    if (input == "red"){
-        return new Pixel(255, 0, 0)
-    } else if (input == "blue"){
-        return new Pixel(0, 0, 255)
-    } else if (input == "green"){
-        return new Pixel(0, 255, 0)
+export function makeColor(input: string): Pixel {
+    if (input == "red") {
+        return new Pixel(255, 0, 0);
+    } else if (input == "blue") {
+        return new Pixel(0, 0, 255);
+    } else if (input == "green") {
+        return new Pixel(0, 255, 0);
     } else {
-        throw new Error("Unknown color: " + input)
+        throw new Error("Unknown color: " + input);
     }
 }
