@@ -38,6 +38,14 @@ export class Screen {
         this.pixels = this.deepCopy(pixels);
     }
 
+    getColumns(input: Pixel[][]): number {
+        return input.length;
+    }
+
+    getRows(input: Pixel[][]): number {
+        return input[0].length;
+    }
+
     /**
      * Create a deep copy of the 2D array of pixels by iterating through each row and column, cloning
      * each pixel in the process.
@@ -64,8 +72,8 @@ export class Screen {
      */
     getPixel(row: number, col: number): Pixel {
         if (
-            col > this.pixels.length ||
-            row > this.pixels[col].length ||
+            col > this.getColumns(this.pixels) ||
+            row > this.getRows(this.pixels) ||
             row < 0 ||
             col < 0
         ) {
@@ -82,8 +90,8 @@ export class Screen {
      */
     setPixel(row: number, col: number, pixel: Pixel): void {
         if (
-            col > this.pixels.length ||
-            row > this.pixels[col].length ||
+            col > this.getColumns(this.pixels) ||
+            row > this.getRows(this.pixels) ||
             row < 0 ||
             col < 0
         ) {
