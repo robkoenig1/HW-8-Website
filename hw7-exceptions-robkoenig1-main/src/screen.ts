@@ -27,10 +27,12 @@ import { Pixel } from "./pixel";
 export class Screen {
     private pixels: Pixel[][];
     constructor(pixels: Pixel[][]) {
-        let lenght: number = pixels[0].length;
-        for (let i: number = 0; i < pixels.length; i++) {
-            if (pixels[i].length != lenght && lenght > 0) {
-                throw new Error("Input array is not rectangular");
+        if (pixels.length != 0) {
+            let length2: number = pixels[0].length;
+            for (let i: number = 0; i < pixels.length; i++) {
+                if (pixels[i].length != length2 && length2 > 0) {
+                    throw new Error("Input array is not rectangular");
+                }
             }
         }
         this.pixels = this.deepCopy(pixels);
