@@ -64,8 +64,8 @@ export class Screen {
      */
     getPixel(row: number, col: number): Pixel {
         if (
-            row > this.pixels.length ||
-            col > this.pixels[0].length ||
+            col > this.pixels.length ||
+            row > this.pixels[0].length ||
             row < 0 ||
             col < 0
         ) {
@@ -82,8 +82,8 @@ export class Screen {
      */
     setPixel(row: number, col: number, pixel: Pixel): void {
         if (
-            row > this.pixels.length ||
-            col > this.pixels[0].length ||
+            col > this.pixels.length ||
+            row > this.pixels[0].length ||
             row < 0 ||
             col < 0
         ) {
