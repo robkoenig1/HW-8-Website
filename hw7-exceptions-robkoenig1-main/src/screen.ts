@@ -63,7 +63,7 @@ export class Screen {
      * @returns The pixel at the given row and column.
      */
     getPixel(row: number, col: number): Pixel {
-        if (col > this.pixels.length || row > this.pixels[0].length) {
+        if (row > this.pixels.length || col > this.pixels[0].length) {
             throw new Error("Index out of bounds: " + row + ", " + col);
         }
         return this.pixels[row][col];
@@ -76,7 +76,7 @@ export class Screen {
      * @param pixel The pixel to set.
      */
     setPixel(row: number, col: number, pixel: Pixel): void {
-        if (col > this.pixels.length || row > this.pixels[0].length) {
+        if (row > this.pixels.length || col > this.pixels[0].length) {
             throw new Error("Index out of bounds: " + row + ", " + col);
         }
         this.pixels[row][col] = pixel.clone();
