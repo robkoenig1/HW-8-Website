@@ -29,7 +29,7 @@ export class Screen {
     constructor(pixels: Pixel[][]) {
         let lenght: number = pixels[0].length;
         for (let i: number = 0; i < pixels.length; i++) {
-            if (pixels[i].length !== lenght) {
+            if (pixels[i].length != lenght) {
                 throw new Error("Input array is not rectangular");
             }
         }
