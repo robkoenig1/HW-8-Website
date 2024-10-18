@@ -71,7 +71,6 @@ export class SilentAccount extends ExceptionalAccount {
             return 0;
         }
     }
-
     deposit(amount: number): number {
         try {
             return super.deposit(amount);
@@ -83,11 +82,9 @@ export class SilentAccount extends ExceptionalAccount {
 
 export class Laptop {
     os: OperatingSystem;
-
     constructor() {
         this.os = new OperatingSystem();
     }
-
     writeFile(filename: string, contents: string): void {
         try {
             let file = this.os.openFile(filename);
@@ -95,10 +92,8 @@ export class Laptop {
         } catch (error) {
             let file = new EditableFile(filename, contents);
             this.os.createFile(file);
-            //file.write(contents);
         }
     }
-
     loadStartupFile(): string {
         try {
             const file = this.os.openFile("startup.txt");
