@@ -38,12 +38,12 @@ export class Screen {
         this.pixels = this.deepCopy(pixels);
     }
 
-    getColumns(input: Pixel[][]): number {
-        return input.length;
+    getColumns(): number {
+        return this.pixels.length > 0 ? this.pixels[0].length : 0;
     }
 
-    getRows(input: Pixel[][]): number {
-        return input[0].length;
+    getRows(): number {
+        return this.pixels.length;
     }
 
     /**
@@ -72,8 +72,8 @@ export class Screen {
      */
     getPixel(row: number, col: number): Pixel {
         if (
-            col > this.getColumns(this.pixels) ||
-            row > this.getRows(this.pixels) ||
+            col >= this.getColumns() ||
+            row >= this.getRows() ||
             row < 0 ||
             col < 0
         ) {
@@ -90,8 +90,8 @@ export class Screen {
      */
     setPixel(row: number, col: number, pixel: Pixel): void {
         if (
-            col > this.getColumns(this.pixels) ||
-            row > this.getRows(this.pixels) ||
+            col >= this.getColumns() ||
+            row >= this.getRows() ||
             row < 0 ||
             col < 0
         ) {
