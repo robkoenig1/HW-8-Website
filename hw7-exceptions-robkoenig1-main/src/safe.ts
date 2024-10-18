@@ -84,8 +84,8 @@ export class SilentAccount extends ExceptionalAccount {
 export class Laptop {
     os: OperatingSystem;
 
-    constructor(os: OperatingSystem) {
-        this.os = os;
+    constructor() {
+        this.os = new OperatingSystem();
     }
 
     writeFile(filename: string, contents: string): void {
