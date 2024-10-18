@@ -62,6 +62,21 @@ export class Sub extends Expression {
     }
 }
 
+export class Div extends Expression {
+    constructor(
+        private left: Expression,
+        private right: Expression,
+    ) {
+        super();
+    }
+    evaluate(): number {
+        if (this.right.evaluate() === 0) {
+            throw new Error("Division by zero");
+        }
+        return this.left.evaluate() / this.right.evaluate();
+    }
+}
+
 /**
  * A class representing an absolute value expression.
  */
