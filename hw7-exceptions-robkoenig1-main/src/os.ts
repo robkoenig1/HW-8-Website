@@ -32,7 +32,8 @@ export class OperatingSystem {
                 return file;
             }
         }
-        return new EditableFile(name, "");
+        throw new Error("File not found: " + name);
+        //return new EditableFile(name, "");
     }
 
     /**
@@ -41,6 +42,11 @@ export class OperatingSystem {
      * @throws Error if the file already exists.
      */
     createFile(newFile: EditableFile): void {
+        for (let file of this.files) {
+            if (file.getName() === newFile.getName()) {
+                throw new Error("File already exists: " + newFile.getName());
+            }
+        }
         this.files.push(newFile);
     }
 }
