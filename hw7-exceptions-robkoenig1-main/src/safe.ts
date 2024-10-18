@@ -89,11 +89,11 @@ export class Laptop {
     }
 
     writeFile(filename: string, contents: string): void {
-        try {
-            const file = new EditableFile(filename, contents);
-            file.write(contents);
-        } catch (error) {
+        if (filename in this.os.openFile(filename)) {
             const file = this.os.openFile(filename);
+            file.write(contents);
+        } else {
+            const file = new EditableFile(filename, contents);
             file.write(contents);
         }
     }
