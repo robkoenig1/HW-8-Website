@@ -93,7 +93,7 @@ export class Laptop {
             const file = new EditableFile(filename, contents);
             file.write(contents);
         } catch (error) {
-            const file = new EditableFile(filename, contents);
+            const file = this.os.openFile(filename);
             file.write(contents);
         }
     }
@@ -111,7 +111,7 @@ export class Laptop {
 export function colorMath(input: Expression): void {
     try {
         const result = input.evaluate();
-        colorLog("[blue]", `Result: ${result}`);
+        colorLog("[blue]" + result);
     } catch (error) {
         colorLog("[yellow]", "Oh no!");
     } finally {
