@@ -14,7 +14,7 @@ ways.
     occurred.
     This demonstrates silencing an error as a way to handle it.
 6.3. Create a class named `Laptop` that composes an `OperatingSystem` object with a field named `os`.
-    Add a method called `editFile` that consumes a filename (string) and contents (string), and either creates
+    Add a method called `writeFile` that consumes a filename (string) and contents (string), and either creates
     the file if it does not exist or overwrites the contents if it does.
     This demonstrates using a default value as a way to handle an error.
     **Note:** I said composes, not extends. Do not use inheritance here.
@@ -22,7 +22,7 @@ ways.
     the contents of a file named "startup.txt" if it exists. If the file does not exist, throw an error
     with the message "Startup file not found".
     This demonstrates catching an error and rethrowing it with a different message.
-6.5. Create a function named `brightenPoint` that consumes a `Screen` object, a row, and a column. The pixel
+*************6.5. Create a function named `brightenPoint` that consumes a `Screen` object, a row, and a column. The pixel
     at that point should have its brightness increased by 1. This function will naturally throw an error if
     the row or column is out of bounds; you *should* not use a try/catch block.
     This demonstrates letting the error propagate as a way to handle it (by not handling it at all).
@@ -54,3 +54,67 @@ import { Expression } from "./math";
 import { OperatingSystem } from "./os";
 import { EditableFile } from "./utilities/files";
 import { colorLog } from "./utilities/colorize";
+
+export function safeMath(input: Expression): void {
+    try {
+        console.log(input.evaluate());
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export class SilentAccount extends ExceptionalAccount {
+    withdraw(amount: number): number {
+        try {
+            return super.withdraw(amount);
+        } catch (error) {
+            return 0;
+        }
+    }
+
+    deposit(amount: number): number {
+        try {
+            return super.deposit(amount);
+        } catch (error) {
+            return 0;
+        }
+    }
+}
+
+export class Laptop {
+    os: OperatingSystem;
+
+    constructor(os: OperatingSystem) {
+        this.os = os;
+    }
+
+    writeFile(filename: string, contents: string): void {
+        try {
+            const file = new EditableFile(filename, contents);
+            file.write(contents);
+        } catch (error) {
+            const file = new EditableFile(filename, contents);
+            file.write(contents);
+        }
+    }
+
+    loadStartupFile(): string {
+        try {
+            const file = this.os.openFile("startup.txt");
+            return file.getContents();
+        } catch (error) {
+            throw new Error("Startup file not found");
+        }
+    }
+}
+
+export function colorMath(input: Expression): void {
+    try {
+        const result = input.evaluate();
+        colorLog("[blue]", `Result: ${result}`);
+    } catch (error) {
+        colorLog("[yellow]", "Oh no!");
+    } finally {
+        colorLog("[reset]");
+    }
+}
