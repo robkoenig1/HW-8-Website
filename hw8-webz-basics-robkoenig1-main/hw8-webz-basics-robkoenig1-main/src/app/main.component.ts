@@ -15,12 +15,12 @@ export class MainComponent extends WebzComponent {
     private myText: string = "Hello from the TypeScript side!";
     private boopButton: BoopButtonComponent = new BoopButtonComponent();
     private calculator = new SimpleCalculatorComponent();
-    private editor = new BoxEditorComponent();
+    private box: BoxEditorComponent = new BoxEditorComponent();
 
     constructor() {
         super(html, css);
         this.addComponent(this.boopButton, "boop-button");
         this.addComponent(this.calculator, "calculator");
-        this.addComponent(this.editor, "editor");
+        this.addComponent(this.box, "box");
     }
 }
